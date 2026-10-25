@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OTF GS | Official Store</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#090909;color:white;font-family:Arial,sans-serif}
+header{text-align:center;padding:30px 12px;background:#111;border-bottom:2px solid #39ff14}
+.logo{font-size:38px;font-weight:900;color:#39ff14}
+header p{color:#ccc}
+nav{text-align:center;padding:15px}
+nav a{color:#39ff14;margin:10px;text-decoration:none}
+.hero{text-align:center;padding:45px 15px;background:#151515}
+.hero h1{font-size:38px}
+.hero span{color:#39ff14}
+button{background:#39ff14;color:#000;border:0;padding:12px 18px;font-weight:bold;border-radius:5px;cursor:pointer}
+.products{padding:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:15px}
+.card{background:#171717;padding:15px;border-radius:10px;text-align:center;border:1px solid #333}
+.icon{font-size:55px}
+.price{color:#39ff14;font-weight:bold}
+section{padding:20px}
+#cart{background:#171717;margin:20px;padding:20px;border-radius:10px}
+select{padding:10px;margin:8px;max-width:100%}
+footer{text-align:center;padding:25px;color:#aaa;border-top:1px solid #333}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">OTF GS</div>
+<p>OWN THE FUTURE • STREETWEAR</p>
+</header>
+
+<nav>
+<a href="#shop">SHOP</a>
+<a href="#cart">MY BAG</a>
+<a href="#about">ABOUT US</a>
+</nav>
+
+<div class="hero">
+<h1>WEAR YOUR <span>IDENTITY.</span></h1>
+<p>Fresh streetwear. Bold style. OTF GS.</p>
+<a href="#shop"><button>SHOP NOW</button></a>
+</div>
+
+<h2 id="shop" style="text-align:center">OUR COLLECTION</h2>
+
+<div class="products">
+<div class="card">
+<div class="icon">👕</div>
+<h3>OTF GS T-Shirt</h3>
+<p>Classic streetwear tee</p>
+<p class="price">KES 1,000</p>
+<button onclick="add('OTF GS T-Shirt',1000)">Add to Bag</button>
+</div>
+
+<div class="card">
+<div class="icon">🧥</div>
+<h3>OTF GS Hoodie</h3>
+<p>Everyday comfort</p>
+<p class="price">KES 2,500</p>
+<button onclick="add('OTF GS Hoodie',2500)">Add to Bag</button>
+</div>
+
+<div class="card">
+<div class="icon">🧢</div>
+<h3>OTF GS Cap</h3>
+<p>Complete your look</p>
+<p class="price">KES 700</p>
+<button onclick="add('OTF GS Cap',700)">Add to Bag</button>
+</div>
+
+<div class="card">
+<div class="icon">👖</div>
+<h3>GS Sweatpants</h3>
+<p>Streetwear essentials</p>
+<p class="price">KES 1,800</p>
+<button onclick="add('GS Sweatpants',1800)">Add to Bag</button>
+</div>
+
+<div class="card">
+<div class="icon">🧥</div>
+<h3>GS Jacket</h3>
+<p>Stand out in style</p>
+<p class="price">KES 3,000</p>
+<button onclick="add('GS Jacket',3000)">Add to Bag</button>
+</div>
+</div>
+
+<section id="cart">
+<h2>🛒 YOUR SHOPPING BAG</h2>
+<div id="items">Your bag is empty.</div>
+<h3>Total: KES <span id="total">0</span></h3>
+
+<label for="delivery">Order method:</label>
+<select id="delivery">
+<option>Delivery within Kenya</option>
+<option>Customer collection</option>
+</select>
+
+<br><br>
+<button onclick="checkout()">Continue to Checkout</button>
+<p id="message"></p>
+</section>
+
+<section id="about">
+<h2>ABOUT OTF GS</h2>
+<p>OTF GS is about confidence, individuality and streetwear.
+Discover your style and own your future.</p>
+<p>Delivery and collection options are available.
+Delivery charges will be confirmed before an order is finalised.</p>
+</section>
+
+<footer>
+<p>OTF GS © 2026</p>
+<p>OWN THE FUTURE.</p>
+</footer>
+
+<script>
+let cart=[];
+function add(name,price){
+cart.push({name,price});
+render();
+}
+function render(){
+document.getElementById('items').innerHTML=cart.length
+?cart.map((p,i)=>`${p.name} — KES ${p.price}
+<button onclick="removeItem(${i})">Remove</button>`).join('<br><br>')
+:'Your bag is empty.';
+document.getElementById('total').textContent=
+cart.reduce((sum,p)=>sum+p.price,0);
+}
+function removeItem(i){
+cart.splice(i,1);
+render();
+}
+function checkout(){
+if(!cart.length){
+document.getElementById('message').textContent='Please add an item first.';
+return;
+}
+document.getElementById('message').textContent=
+'This is a preview. Real orders and M-Pesa payments are not active yet.';
+}
+</script>
+
+</body>
+</html>
